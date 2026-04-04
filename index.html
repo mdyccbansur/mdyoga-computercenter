@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MD Yoga and Computer Center</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Poppins',sans-serif;background:#f5f7fa;color:#222}
+    header{background:linear-gradient(90deg,#0a9396,#005f73);color:#fff;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .owner-box{display:flex;align-items:center;gap:10px;min-width:220px}
+    .owner-box img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid #ffd166;background:#fff}
+    .owner-name{font-size:18px;font-weight:700;color:#ffd166;line-height:1.2}
+    .title-box{text-align:center;flex:1;min-width:280px}
+    .title-box h1{margin:0;font-size:36px;font-weight:700;background:linear-gradient(90deg,#ffffff,#ffd166,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 12px rgba(255,255,255,.2);animation:titleGlow 2s ease-in-out infinite}
+    .admission-badge{margin:10px auto 0;display:inline-block;padding:7px 16px;background:linear-gradient(90deg,#ff9f1c,#ffbf69);color:#000;font-weight:600;border-radius:22px;box-shadow:0 3px 8px rgba(0,0,0,.2);animation:blinkGlow 1s infinite}
+    .logo-box{width:90px;display:flex;justify-content:flex-end}
+    .logo-box img{width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid #ffd166;background:#fff}
+    nav{background:#001219;padding:12px;text-align:center;position:sticky;top:0;z-index:50}
+    nav a{color:#fff;margin:0 14px;text-decoration:none;font-weight:500}
+    nav a:hover{color:#94d2bd}
+    .hero{background:linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.58)),url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;color:#fff;padding:120px 20px;text-align:center}
+    .hero h1{margin:0 0 10px;font-size:42px}
+    .hero p{margin:0;font-size:18px}
+    section{padding:55px 20px;text-align:center}
+    section h2{margin-top:0;font-size:30px;color:#023047}
+    .courses{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:1300px;margin:0 auto}
+    .course{background:#fff;padding:24px;width:230px;border-radius:16px;box-shadow:0 5px 15px rgba(0,0,0,.1);transition:.3s;animation:fadeUp .8s ease}
+    #courses .course{cursor:pointer}
+    .course:hover{transform:translateY(-10px)}
+    .course img{width:60px;height:60px;object-fit:contain;margin-bottom:10px}
+    .course-title{font-weight:600;line-height:1.4}
+    .course button{margin-top:12px;padding:9px 16px;border:none;border-radius:8px;background:#0a9396;color:#fff;cursor:pointer;font-weight:500}
+    .course button:hover{background:#005f73}
+    #yoga{background:#e0fbfc}
+    .gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:15px}
+    .gallery img{width:250px;height:180px;object-fit:cover;border-radius:12px;box-shadow:0 5px 12px rgba(0,0,0,.15)}
+    form{background:#fff;padding:30px;max-width:430px;margin:auto;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.1)}
+    form input,form textarea{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc;font-family:inherit}
+    form textarea{min-height:90px;resize:vertical}
+    form button{padding:12px 25px;background:#0a9396;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+    form button:hover{background:#005f73}
+    footer{background:#001219;color:#fff;text-align:center;padding:18px 12px}
+    footer p{margin:6px 0}
+
+    .left-buttons{position:fixed;left:18px;bottom:120px;display:flex;flex-direction:column;gap:10px;z-index:60}
+    .left-buttons a{background:#001219;color:#fff;padding:10px 15px;border-radius:24px;text-decoration:none;font-size:14px;box-shadow:0 5px 10px rgba(0,0,0,.3);display:flex;align-items:center;gap:8px}
+    .left-buttons a:hover{background:#0a9396}
+    .left-buttons a img{width:18px;height:18px;object-fit:contain}
+
+    .popup{position:fixed;bottom:92px;right:20px;background:#fff;padding:12px 15px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.2);font-size:14px;z-index:60;animation:fadeIn 1s}
+    .call-btn,.whatsapp{position:fixed;right:20px;color:#fff;padding:12px 18px;border-radius:30px;font-size:16px;text-decoration:none;display:flex;align-items:center;gap:8px;box-shadow:0 5px 10px rgba(0,0,0,.3);z-index:60}
+    .call-btn{bottom:80px;background:#007bff}
+    .call-btn:hover{background:#0056b3}
+    .whatsapp{bottom:20px;background:#25D366}
+    .whatsapp:hover{background:#1ebe5d}
+    .whatsapp img{width:22px;height:22px}
+
+    #formModal,#courseInfoModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:center;justify-content:center;padding:18px}
+    .modal-card{background:#fff;width:100%;max-width:720px;border-radius:16px;overflow:auto;max-height:92vh;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,.25)}
+    .modal-card h2{margin:0 0 16px;text-align:center;color:#023047}
+    .course-info-title{font-size:24px;font-weight:700;color:#0a9396;margin-bottom:12px}
+    .course-info-text{font-size:15px;line-height:1.7;margin-bottom:18px;text-align:left}
+    .modal-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .btn-main,.btn-alt,.btn-close{padding:11px 18px;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+    .btn-main{background:#0a9396;color:#fff}
+    .btn-alt{background:#ff9f1c;color:#000}
+    .btn-close{background:#e63946;color:#fff}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes blinkGlow{0%,100%{opacity:1;box-shadow:0 0 10px rgba(255,191,105,.8)}50%{opacity:.6;box-shadow:0 0 20px rgba(255,159,28,1)}}
+    @keyframes titleGlow{0%,100%{transform:scale(1);filter:drop-shadow(0 0 6px rgba(255,209,102,.35))}50%{transform:scale(1.03);filter:drop-shadow(0 0 16px rgba(255,209,102,.7))}}
+
+    @media (max-width:900px){
+      header{padding:18px;justify-content:center}
+      .owner-box,.logo-box{min-width:auto}
+      .logo-box{justify-content:center;width:auto}
+      .title-box h1{font-size:30px}
+      .left-buttons{left:10px;bottom:130px}
+      .popup,.call-btn,.whatsapp{right:10px}
+    }
+    @media (max-width:600px){
+      .hero h1{font-size:32px}
+      .course{width:100%;max-width:320px}
+      .left-buttons a{font-size:12px;padding:9px 12px}
+      .call-btn,.whatsapp{font-size:14px;padding:10px 14px}
+      .popup{font-size:12px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="owner-box">
+      <img src="owner.png" alt="Owner Photo">
+      <div class="owner-name">PRO. MANJEET YADAV</div>
+    </div>
+
+    <div class="title-box">
+      <h1>MD Yoga &amp; Computer Center</h1>
+      <div class="admission-badge">🎓 Admission Open Now</div>
+    </div>
+
+    <div class="logo-box">
+      <img src="logo.png" alt="Logo">
+    </div>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#yoga">Yoga Courses</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Build Your Career With Us</h1>
+    <p>Computer Courses | Skill Development | Yoga</p>
+  </div>
+
+  <section id="courses">
+    <h2>Our Professional Courses</h2>
+    <div class="courses">
+      <div class="course" data-course="RS-CIT"><img src="https://img.icons8.com/color/96/computer.png" alt="RS-CIT"><div class="course-title">RS-CIT</div></div>
+      <div class="course" data-course="Basic Computer"><img src="https://img.icons8.com/color/96/laptop.png" alt="Basic Computer"><div class="course-title">Basic Computer</div></div>
+      <div class="course" data-course="MS Office"><img src="https://img.icons8.com/color/96/microsoft-office-2019.png" alt="MS Office"><div class="course-title">MS Office</div></div>
+      <div class="course" data-course="Advance Excel"><img src="https://img.icons8.com/color/96/ms-excel.png" alt="Advance Excel"><div class="course-title">Advance Excel</div></div>
+      <div class="course" data-course="Internet & Email"><img src="https://img.icons8.com/color/96/internet.png" alt="Internet & Email"><div class="course-title">Internet &amp; Email</div></div>
+      <div class="course" data-course="Digital Marketing"><img src="https://img.icons8.com/color/96/combo-chart--v1.png" alt="Digital Marketing"><div class="course-title">Digital Marketing</div></div>
+      <div class="course" data-course="Graphic Design"><img src="https://img.icons8.com/color/96/design.png" alt="Graphic Design"><div class="course-title">Graphic Design</div></div>
+      <div class="course" data-course="ADCA / DCA"><img src="https://img.icons8.com/color/96/classroom.png" alt="ADCA / DCA"><div class="course-title">ADCA / DCA</div></div>
+      <div class="course" data-course="Tally & Accounting"><img src="https://img.icons8.com/color/96/accounting.png" alt="Tally & Accounting"><div class="course-title">Tally &amp; Accounting</div></div>
+      <div class="course" data-course="PGDCA / CCA"><img src="https://img.icons8.com/color/96/diploma.png" alt="PGDCA / CCA"><div class="course-title">PGDCA / CCA</div></div>
+      <div class="course" data-course="Typing (Hindi & English)"><img src="https://img.icons8.com/color/96/keyboard.png" alt="Typing"><div class="course-title">Typing (Hindi &amp; English)</div></div>
+    </div>
+  </section>
+
+  <section id="yoga">
+    <h2>Yoga Courses</h2>
+    <div class="courses">
+      <div class="course"><img src="https://img.icons8.com/color/96/yoga.png" alt="CYT"><div class="course-title">CYT (Certificate in Yoga Therapy) Duration 6 Month </div><button onclick="openForm('CYT (Certificate in Yoga Therapy)')">Join Now</button></div>
+      <div class="course"><img src="https://img.icons8.com/color/96/yoga.png" alt="DYT"><div class="course-title">DYT (Diploma in Yoga Therapy) Duration 1 Year </div><button onclick="openForm('DYT (Diploma in Yoga Therapy)')">Join Now</button></div>
+      <div class="course"><img src="https://img.icons8.com/color/96/yoga.png" alt="PGDYT"><div class="course-title">PGDYT (Post Graduate Diploma in Yoga Therapy) Duration 1 Year </div><button onclick="openForm('PGDYT (Post Graduate Diploma in Yoga Therapy)')">Join Now</button></div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2>Our Classes</h2>
+    <div class="gallery">
+      <img src="yoga1.jpg" alt="Yoga 1">
+      <img src="yoga2.jpg" alt="Yoga 2">
+      <img src="yoga3.jpg" alt="Yoga 3">
+      <img src="yoga4.jpg" alt="Yoga 4">
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Admission Form</h2>
+    <form onsubmit="submitContactForm(event)">
+      <input type="text" id="contactName" placeholder="Your Name" required>
+      <input type="text" id="contactPhone" placeholder="Mobile Number" required>
+      <textarea id="contactCourse" placeholder="Course Interested"></textarea>
+      <button type="submit">Apply Now</button>
+    </form>
+
+    <p>📍 Add :- Govt.Sr.Sec. School 2nd gate ke Samne Marudhar School Road Bansur, Kotpuli-Behror (Raj) 301402</p>
+    <p>📞 9929373727</p>
+    <p>📧 mdycc.bansur@gmail.com</p>
+    <iframe src="https://www.google.com/maps?q=27.68886,76.35369&output=embed" width="90%" height="300" style="border:0;margin-top:20px;border-radius:12px;"></iframe>
+    <p><strong>Exact Location:</strong> 27°41'19.9&quot;N 76°21'13.3&quot;E</p>
+  </section>
+
+  <footer>
+    <p>© 2026 MD Yoga and Computer Center</p>
+    <p><strong>Owner:</strong> MANJEET YADAV</p>
+    <p><strong>Website Design By:</strong> MOHIT RAJPUT</p>
+  </footer>
+
+  <div class="left-buttons">
+    <a href="mailto:mdycc.bansur@gmail.com"><img src="https://img.icons8.com/color/48/gmail-new.png" alt="Email"> Email Us</a>
+    <a href="tel:9929373727"><img src="https://img.icons8.com/color/48/phone.png" alt="Call"> Call Us</a>
+    <a href="https://instagram.com/md_computer_center" target="_blank"><img src="https://img.icons8.com/color/48/instagram-new--v1.png" alt="Instagram"> Instagram</a>
+    <a href="https://www.facebook.com/share/1FBU6MzkZ6/" target="_blank"><img src="https://img.icons8.com/color/48/facebook-new.png" alt="Facebook"> Facebook</a>
+  </div>
+
+  <div class="popup">Need help? Chat or Call us 👇</div>
+  <a class="call-btn" href="tel:9929373727">📞 Call Now</a>
+  <a class="whatsapp" href="https://wa.me/919929373727" target="_blank"><img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp"> Chat Now</a>
+
+  <div id="courseInfoModal">
+    <div class="modal-card">
+      <div class="course-info-title" id="courseInfoTitle">Course Name</div>
+      <div class="course-info-text" id="courseInfoText">Course Details</div>
+      <div class="modal-actions">
+        <button class="btn-main" onclick="enrollFromInfo()">Enroll Now</button>
+        <button class="btn-close" onclick="closeCourseInfo()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="formModal">
+    <div class="modal-card">
+      <h2>Registration Form</h2>
+      <form onsubmit="sendRegistrationForm(event)">
+        <input type="text" id="regName" placeholder="Applicant Name" required>
+        <input type="date" id="regDob" required>
+        <input type="text" id="regCourse" placeholder="Course Name" required>
+        <input type="text" id="regFather" placeholder="Father Name">
+        <input type="text" id="regMother" placeholder="Mother Name">
+        <textarea id="regAddress" placeholder="Address"></textarea>
+        <input type="text" id="regMobile" placeholder="Mobile Number" required>
+        <input type="email" id="regEmail" placeholder="Email">
+        <div class="modal-actions">
+          <button type="submit" class="btn-main">Submit</button>
+          <button type="button" class="btn-close" onclick="closeForm()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const courseDetails = {
+      'RS-CIT': 'RS-CIT Rajasthan government se juda basic computer course hai. Isme computer fundamentals, typing, internet aur MS Office ki practical training di jati hai. Beginners aur job seekers ke liye useful course hai.',
+      'Basic Computer': 'Is course me computer basics, typing practice, internet chalana, files aur folders manage karna aur daily office use ki basic knowledge di jati hai.',
+      'MS Office': 'MS Office course me MS Word, MS Excel aur PowerPoint ki complete training di jati hai. Office work, school projects aur computer jobs ke liye bahut useful hai.',
+      'Advance Excel': 'Advance Excel me formulas, charts, reports, filters, data analysis aur advanced office tools sikhaye jate hain. Accountant aur office staff ke liye best course hai.',
+      'Internet & Email': 'Internet & Email course me browsing, Gmail banana, email bhejna, online forms fill karna aur digital services use karna sikhaya jata hai.',
+      'Digital Marketing': 'Digital Marketing me social media marketing, SEO, online promotion, branding aur digital tools ka practical gyaan diya jata hai.',
+      'Graphic Design': 'Graphic Design me Photoshop, CorelDRAW, poster banner design aur creative designing ke basic to practical concepts sikhaye jate hain.',
+      'ADCA / DCA': 'ADCA aur DCA diploma computer application courses hain jisme computer basics, office software aur practical skill development par focus hota hai.',
+      'Tally & Accounting': 'Tally & Accounting course me billing, ledger, voucher entry, GST basics aur accounting software ka practical use sikhaya jata hai.',
+      'PGDCA / CCA': 'PGDCA aur CCA advanced level computer courses hain jo office work, practical applications aur job-oriented skills ke liye useful hote hain.',
+      'Typing (Hindi & English)': 'Typing course me Hindi aur English typing speed, accuracy aur keyboard practice par kaam kiya jata hai. सरकारी aur private dono jobs me helpful hai.'
+    };
+
+    let selectedCourse = '';
+
+    function submitContactForm(event){
+      event.preventDefault();
+      const name = document.getElementById('contactName').value;
+      const phone = document.getElementById('contactPhone').value;
+      const course = document.getElementById('contactCourse').value;
+      const msg = `New Admission:%0AName: ${name}%0APhone: ${phone}%0ACourse: ${course}`;
+      window.open(`https://wa.me/919929373727?text=${msg}`,'_blank');
+    }
+
+    function openCourseInfo(courseName){
+      selectedCourse = courseName;
+      document.getElementById('courseInfoTitle').textContent = courseName;
+      document.getElementById('courseInfoText').textContent = courseDetails[courseName] || 'Professional course for skill development.';
+      document.getElementById('courseInfoModal').style.display = 'flex';
+    }
+
+    function closeCourseInfo(){
+      document.getElementById('courseInfoModal').style.display = 'none';
+    }
+
+    function enrollFromInfo(){
+      closeCourseInfo();
+      openForm(selectedCourse);
+    }
+
+    function openForm(courseName=''){
+      document.getElementById('formModal').style.display = 'flex';
+      document.getElementById('regCourse').value = courseName;
+    }
+
+    function closeForm(){
+      document.getElementById('formModal').style.display = 'none';
+    }
+
+    function sendRegistrationForm(event){
+      event.preventDefault();
+      const data = {
+        'Applicant Name': document.getElementById('regName').value,
+        'Date of Birth': document.getElementById('regDob').value,
+        'Course Name': document.getElementById('regCourse').value,
+        'Father Name': document.getElementById('regFather').value,
+        'Mother Name': document.getElementById('regMother').value,
+        'Address': document.getElementById('regAddress').value,
+        'Mobile Number': document.getElementById('regMobile').value,
+        'Email': document.getElementById('regEmail').value,
+      };
+      let msg = 'Registration Form:\n';
+      for (const key in data) {
+        msg += `${key}: ${data[key]}\n`;
+      }
+      window.open(`https://wa.me/919929373727?text=${encodeURIComponent(msg)}`,'_blank');
+    }
+
+    document.querySelectorAll('#courses .course').forEach(card => {
+      card.addEventListener('click', () => openCourseInfo(card.dataset.course));
+    });
+
+    window.addEventListener('click', function(e){
+      if(e.target.id === 'formModal') closeForm();
+      if(e.target.id === 'courseInfoModal') closeCourseInfo();
+    });
+  </script>
+</body>
+</html>
